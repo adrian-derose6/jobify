@@ -1,13 +1,11 @@
-const register = (req, res) => {
+export const register = async (req, res) => {
 	res.send('register user');
 };
 
-const login = (req, res) => {
+export const login = async (req, res) => {
 	res.send('login user');
 };
 
-const updateUser = (req, res) => {
+export const updateUser = async (req, res) => {
 	res.send('update user');
 };
-
-export { register, login, updateUser };

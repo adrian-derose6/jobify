@@ -1,8 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
-import connectDB from './db/connect-db';
-import authRouter from './routes/authRoutes';
+import connectDB from './db/connect-db.js';
+
+// Import routes
+import authRouter from './routes/authRoutes.js';
+import jobsRouter from './routes/jobsRoutes.js';
 
 // Import middleware
 import notFoundMiddleware from './middleware/not-found.js';
@@ -19,6 +22,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/jobs', jobsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
