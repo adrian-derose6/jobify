@@ -2,7 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import connectDB from './db/connect-db';
+import authRouter from './routes/authRoutes';
 
+// Import middleware
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
 
@@ -10,9 +12,13 @@ dotenv.config();
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
 	res.send('Welcome!');
 });
+
+app.use('/api/v1/auth', authRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
