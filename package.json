@@ -1,5 +1,27 @@
 {
-  "dependencies": {
-    "normalize.css": "^8.0.1"
-  }
+	"name": "jobify",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon server"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/adrian-derose6/jobify.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/adrian-derose6/jobify/issues"
+	},
+	"homepage": "https://github.com/adrian-derose6/jobify#readme",
+	"type": "module",
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	},
+	"dependencies": {
+		"express": "^4.17.3"
+	}
 }
