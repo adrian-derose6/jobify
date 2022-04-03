@@ -4,7 +4,10 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon server"
+		"dev": "nodemon server --ignore client",
+		"server": "nodemon server --ignore client",
+		"client": "npm start --prefix client",
+		"start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
 	},
 	"repository": {
 		"type": "git",
