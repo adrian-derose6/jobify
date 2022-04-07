@@ -5,12 +5,9 @@ import reducer from './reducer';
 import {
 	CLEAR_ALERT,
 	DISPLAY_ALERT,
-	REGISTER_USER_BEGIN,
-	REGISTER_USER_SUCCESS,
-	REGISTER_USER_ERROR,
-	LOGIN_USER_BEGIN,
-	LOGIN_USER_SUCCESS,
-	LOGIN_USER_ERROR,
+	AUTH_USER_BEGIN,
+	AUTH_USER_SUCCESS,
+	AUTH_USER_ERROR,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -57,18 +54,27 @@ const AppProvider = ({ children }) => {
 		localStorage.removeItem('user');
 		localStorage.removeItem('location');
 	};
-	const registerUser = async (currentUser) => {
+	const authUser = async ({ currentUser, type = 'register' }) => {
+		const endPoint = type === 'register' ? 'register' : 'login';
+		const alertText =
+			type === 'register'
+				? 'User Created: Redirecting...'
+				: 'Login Successful! Redirecting...';
+
 		dispatch({
-			type: REGISTER_USER_BEGIN,
+			type: AUTH_USER_BEGIN,
 		});
 
 		try {
-			const { data } = await axios.post(`${apiUrl}/auth/register`, currentUser);
+			const { data } = await axios.post(
+				`${apiUrl}/auth/${endPoint}`,
+				currentUser
+			);
 			const { user, token, location } = data;
 
 			dispatch({
-				type: REGISTER_USER_SUCCESS,
-				payload: { user, token, location },
+				type: AUTH_USER_SUCCESS,
+				payload: { user, token, location, alertText },
 			});
 
 			addUserToLocalStorage({
@@ -78,35 +84,7 @@ const AppProvider = ({ children }) => {
 			});
 		} catch (error) {
 			dispatch({
-				type: REGISTER_USER_ERROR,
-				payload: { msg: error.response.data.msg },
-			});
-		}
-		clearAlert();
-	};
-
-	const loginUser = async (currentUser) => {
-		dispatch({
-			type: LOGIN_USER_BEGIN,
-		});
-
-		try {
-			const { data } = await axios.post(`${apiUrl}/auth/login`, currentUser);
-			const { user, token, location } = data;
-
-			dispatch({
-				type: LOGIN_USER_SUCCESS,
-				payload: { user, token, location },
-			});
-
-			addUserToLocalStorage({
-				user,
-				token,
-				location,
-			});
-		} catch (error) {
-			dispatch({
-				type: LOGIN_USER_ERROR,
+				type: AUTH_USER_ERROR,
 				payload: { msg: error.response.data.msg },
 			});
 		}
@@ -114,9 +92,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	return (
-		<AppContext.Provider
-			value={{ ...state, displayAlert, registerUser, loginUser }}
-		>
+		<AppContext.Provider value={{ ...state, displayAlert, authUser }}>
 			{children}
 		</AppContext.Provider>
 	);

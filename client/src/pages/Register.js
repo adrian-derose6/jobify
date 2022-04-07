@@ -1,4 +1,4 @@
-import { useState, uesEffect, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Logo, FormRow, Alert } from '../components';
@@ -15,7 +15,7 @@ const initialState = {
 const Register = () => {
 	const [values, setValues] = useState(initialState);
 	const navigate = useNavigate();
-	const { isLoading, showAlert, displayAlert, registerUser, loginUser, user } =
+	const { isLoading, showAlert, displayAlert, authUser, user } =
 		useAppContext();
 
 	useEffect(() => {
@@ -46,9 +46,9 @@ const Register = () => {
 
 		const currentUser = { name, email, password };
 		if (isMember) {
-			loginUser(currentUser);
+			authUser({ currentUser, type: 'login' });
 		} else {
-			registerUser(currentUser);
+			authUser({ currentUser, type: 'register' });
 		}
 	};
 
