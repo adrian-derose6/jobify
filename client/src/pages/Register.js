@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, uesEffect, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Logo, FormRow, Alert } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { useAppContext } from '../context/appContext';
@@ -12,20 +14,31 @@ const initialState = {
 
 const Register = () => {
 	const [values, setValues] = useState(initialState);
-	// global state and useNavigate
-	const { isLoading, showAlert, displayAlert, registerUser } = useAppContext();
+	const navigate = useNavigate();
+	const { isLoading, showAlert, displayAlert, registerUser, user } =
+		useAppContext();
+
+	useEffect(() => {
+		if (user) {
+			setTimeout(() => {
+				navigate('/');
+			}, 3000);
+		}
+	}, [user, navigate]);
+
 	const toggleMember = () => {
 		setValues((values) => ({ ...values, isMember: !values.isMember }));
 	};
 
 	const handleChange = (e) => {
-		setValues({ ...values, [e.target.name]: [e.target.value] });
+		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 
 		const { name, email, password, isMember } = values;
+
 		if (!email || !password || (!isMember && !name)) {
 			displayAlert();
 			return;
