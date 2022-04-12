@@ -8,6 +8,7 @@ import {
 	AUTH_USER_BEGIN,
 	AUTH_USER_SUCCESS,
 	AUTH_USER_ERROR,
+	TOGGLE_SIDEBAR,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -23,6 +24,7 @@ const initialState = {
 	token: token,
 	userLocation: userLocation || '',
 	jobLocation: userLocation || '',
+	showSidebar: false,
 };
 
 const apiUrl = 'http://localhost:5000/api/v1';
@@ -91,8 +93,16 @@ const AppProvider = ({ children }) => {
 		clearAlert();
 	};
 
+	const toggleSidebar = () => {
+		dispatch({
+			type: TOGGLE_SIDEBAR,
+		});
+	};
+
 	return (
-		<AppContext.Provider value={{ ...state, displayAlert, authUser }}>
+		<AppContext.Provider
+			value={{ ...state, displayAlert, authUser, toggleSidebar }}
+		>
 			{children}
 		</AppContext.Provider>
 	);
