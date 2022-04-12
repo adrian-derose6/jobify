@@ -5,4 +5,6 @@ export const AUTH_USER_BEGIN = 'AUTH_USER_BEGIN';
 export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';
 export const AUTH_USER_ERROR = 'AUTH_USER_ERROR';
 
+export const LOGOUT_USER = 'LOGOUT_USER';
+
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';

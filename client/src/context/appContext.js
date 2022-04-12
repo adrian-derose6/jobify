@@ -8,6 +8,7 @@ import {
 	AUTH_USER_BEGIN,
 	AUTH_USER_SUCCESS,
 	AUTH_USER_ERROR,
+	LOGOUT_USER,
 	TOGGLE_SIDEBAR,
 } from './actions';
 
@@ -93,7 +94,10 @@ const AppProvider = ({ children }) => {
 		clearAlert();
 	};
 
-	const logoutUser = () => {};
+	const logoutUser = () => {
+		dispatch({ type: LOGOUT_USER });
+		removeUserFromLocalStorage();
+	};
 
 	const toggleSidebar = () => {
 		dispatch({

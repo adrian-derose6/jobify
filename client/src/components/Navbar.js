@@ -26,7 +26,7 @@ const Navbar = () => {
 				<div className='btn-container'>
 					<button className='btn' onClick={toggleDropdown}>
 						<FaUserCircle />
-						{user.name}
+						{user?.name}
 						<FaCaretDown />
 					</button>
 					<div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
