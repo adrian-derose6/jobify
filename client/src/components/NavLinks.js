@@ -13,7 +13,7 @@ const NavLinks = ({ onClick }) => {
 						className={({ isActive }) =>
 							isActive ? 'nav-link active' : 'nav-link'
 						}
-						ket={id}
+						key={id}
 						onClick={onClick}
 					>
 						<span className='icon'>{icon}</span>
