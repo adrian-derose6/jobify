@@ -18,6 +18,8 @@ import {
 	CREATE_JOB_BEGIN,
 	CREATE_JOB_SUCCESS,
 	CREATE_JOB_ERROR,
+	GET_JOBS_BEGIN,
+	GET_JOBS_SUCCESS,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -44,6 +46,10 @@ const initialState = {
 	jobType: 'full-time',
 	statusOptions: ['pending', 'interview', 'declined'],
 	status: 'pending',
+	jobs: [],
+	totalJobs: 0,
+	page: 1,
+	numOfPages: 1,
 };
 
 const AppContext = React.createContext();
@@ -208,6 +214,28 @@ const AppProvider = ({ children }) => {
 				type: CREATE_JOB_ERROR,
 				payload: { msg: error.response.data.msg },
 			});
+		}
+		clearAlert();
+	};
+
+	const getJobs = async () => {
+		let url = `url`;
+
+		dispatch({ type: GET_JOBS_BEGIN });
+		try {
+			const { data } = await authFetch(url);
+			const { jobs, totalJobs, numOfPages } = data;
+
+			dispatch({
+				type: GET_JOBS_SUCCESS,
+				payload: {
+					jobs,
+					totalJobs,
+					numOfPages,
+				},
+			});
+		} catch (error) {
+			logoutUser();
 		}
 		clearAlert();
 	};
