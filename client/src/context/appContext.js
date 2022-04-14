@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 import reducer from './reducer';
@@ -219,7 +219,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const getJobs = async () => {
-		let url = `url`;
+		let url = `/jobs`;
 
 		dispatch({ type: GET_JOBS_BEGIN });
 		try {
@@ -235,10 +235,15 @@ const AppProvider = ({ children }) => {
 				},
 			});
 		} catch (error) {
-			logoutUser();
+			console.log(error.response);
+			//logoutUser();
 		}
 		clearAlert();
 	};
+
+	useEffect(() => {
+		getJobs();
+	}, []);
 
 	return (
 		<AppContext.Provider
