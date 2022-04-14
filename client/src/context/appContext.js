@@ -241,6 +241,14 @@ const AppProvider = ({ children }) => {
 		clearAlert();
 	};
 
+	const setEditJob = (id) => {
+		console.log(`Set edit jobs: ${id}`);
+	};
+
+	const deleteJob = (id) => {
+		console.log(`Delete: ${id}`);
+	};
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -254,6 +262,8 @@ const AppProvider = ({ children }) => {
 				clearValues,
 				createJob,
 				getJobs,
+				setEditJob,
+				deleteJob,
 			}}
 		>
 			{children}
