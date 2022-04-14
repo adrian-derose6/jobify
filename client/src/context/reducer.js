@@ -9,6 +9,8 @@ import {
 	UPDATE_USER_BEGIN,
 	UPDATE_USER_SUCCESS,
 	UPDATE_USER_ERROR,
+	HANDLE_CHANGE,
+	CLEAR_VALUES,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -101,6 +103,25 @@ const reducer = (state, action) => {
 			...state,
 			showSidebar: !state.showSidebar,
 		};
+	}
+	if (action.type === HANDLE_CHANGE) {
+		return {
+			...state,
+			[action.payload.name]: action.payload.value,
+		};
+	}
+	if (action.type === CLEAR_VALUES) {
+		const initialState = {
+			isEditingJob: false,
+			editJobId: '',
+			position: '',
+			company: '',
+			jobLocation: state.userLocation,
+			jobType: 'full-time',
+			status: 'pending',
+		};
+
+		return { ...state, ...initialState };
 	}
 	throw Error(`No such action : ${action.type}`);
 };
