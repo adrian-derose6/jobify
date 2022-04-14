@@ -236,14 +236,10 @@ const AppProvider = ({ children }) => {
 			});
 		} catch (error) {
 			console.log(error.response);
-			//logoutUser();
+			// logoutUser();
 		}
 		clearAlert();
 	};
-
-	useEffect(() => {
-		getJobs();
-	}, []);
 
 	return (
 		<AppContext.Provider
@@ -257,6 +253,7 @@ const AppProvider = ({ children }) => {
 				handleChange,
 				clearValues,
 				createJob,
+				getJobs,
 			}}
 		>
 			{children}

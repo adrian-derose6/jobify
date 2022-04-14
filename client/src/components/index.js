@@ -5,6 +5,8 @@ import Alert from './Alert';
 import BigSidebar from './BigSidebar';
 import SmallSidebar from './SmallSidebar';
 import Navbar from './Navbar';
+import JobsContainer from './JobsContainer';
+import SearchContainer from './SearchContainer';
 
 export {
 	Logo,
@@ -14,4 +16,6 @@ export {
 	Navbar,
 	BigSidebar,
 	SmallSidebar,
+	JobsContainer,
+	SearchContainer,
 };
