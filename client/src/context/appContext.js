@@ -19,6 +19,8 @@ const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 const userLocation = localStorage.getItem('location');
 
+const apiUrl = 'http://localhost:5000/api/v1';
+
 const initialState = {
 	isLoading: false,
 	showAlert: false,
@@ -27,11 +29,17 @@ const initialState = {
 	user: user ? JSON.parse(user) : null,
 	token: token,
 	userLocation: userLocation || '',
-	jobLocation: userLocation || '',
 	showSidebar: false,
+	isEditingJob: false,
+	editJobId: '',
+	position: '',
+	company: '',
+	jobLocation: userLocation || '',
+	jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
+	jobType: 'full-time',
+	statusOptions: ['pending', 'interview', 'declined'],
+	status: 'pending',
 };
-
-const apiUrl = 'http://localhost:5000/api/v1';
 
 const AppContext = React.createContext();
 
