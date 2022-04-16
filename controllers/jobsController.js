@@ -6,6 +6,7 @@ import {
 	NotFoundError,
 	UnauthenticatedError,
 } from '../errors/index.js';
+import { checkPermissions } from '../utils/index.js';
 
 export const createJob = async (req, res) => {
 	const { position, company } = req.body;
@@ -26,7 +27,6 @@ export const deleteJob = async (req, res) => {
 
 export const updateJob = async (req, res) => {
 	const { id: jobId } = req.params;
-
 	const { company, position } = req.body;
 
 	if (!company || !position) {
@@ -40,6 +40,8 @@ export const updateJob = async (req, res) => {
 	}
 
 	// Check permissions
+	checkPermissions(req.user, job.createdBy);
+
 	const updatedJob = await Job.findOneAndUpdate({ _id: jobId }, req.body, {
 		new: true,
 		runValidators: true,
