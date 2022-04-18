@@ -1,4 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
+import mongoose from 'mongoose';
 
 import Job from '../models/Job.js';
 import {
@@ -69,5 +70,23 @@ export const getAllJobs = async (req, res) => {
 };
 
 export const showStats = async (req, res) => {
-	res.send('show stats');
+	let stats = await Job.aggregate([
+		{ $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+		{ $group: { _id: '$status', count: { $sum: 1 } } },
+	]);
+
+	stats = stats.reduce((acc, curr) => {
+		const { _id: title, count } = curr;
+		acc[title] = count;
+		return acc;
+	}, {});
+
+	const defaultStats = {
+		pending: stats.pending || 0,
+		interview: stats.interview || 0,
+		declined: stats.declines || 0,
+	};
+	let monthlyApplications = [];
+
+	res.status(StatusCodes.OK).json({ stats: defaultStats, monthlyApplications });
 };
