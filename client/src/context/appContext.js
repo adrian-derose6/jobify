@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 
 import reducer from './reducer';
@@ -199,7 +199,7 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: CREATE_JOB_BEGIN });
 
 		try {
-			const { position, company, jobLocation, jobType, status, token } = state;
+			const { position, company, jobLocation, jobType, status } = state;
 
 			await authFetch.post('/jobs', {
 				company,
