@@ -12,7 +12,7 @@ const Stats = () => {
 	if (isLoading) {
 		return <Loading center />;
 	}
-
+	console.log('render');
 	return (
 		<>
 			<StatsContainer />

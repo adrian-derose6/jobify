@@ -10,7 +10,7 @@ import JobsContainer from './JobsContainer';
 import SearchContainer from './SearchContainer';
 import StatsContainer from './StatsContainer';
 import ChartsContainer from './ChartsContainer';
-import StatsItem from './StatsItem';
+import StatItem from './StatItem';
 
 export {
 	Logo,
@@ -25,5 +25,5 @@ export {
 	SearchContainer,
 	StatsContainer,
 	ChartsContainer,
-	StatsItem,
+	StatItem,
 };
