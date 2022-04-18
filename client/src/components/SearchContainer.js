@@ -1,4 +1,4 @@
 const SearchContainer = () => {
-	return <h1>SearchContainer</h1>;
+	return <h1>Search Container</h1>;
 };
 export default SearchContainer;

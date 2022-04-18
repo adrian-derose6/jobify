@@ -5,6 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import connectDB from './db/connect-db.js';
+import Job from './models/Job.js';
 
 // Import routes
 import authRouter from './routes/authRoutes.js';
@@ -45,6 +46,7 @@ const port = process.env.PORT || 5000;
 const start = async () => {
 	try {
 		await connectDB(process.env.MONGO_URL);
+
 		app.listen(port, () => {
 			console.log(`Server is listening on port ${port}`);
 		});

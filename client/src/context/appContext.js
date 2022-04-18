@@ -120,9 +120,7 @@ const AppProvider = ({ children }) => {
 				? 'User Created: Redirecting...'
 				: 'Login Successful! Redirecting...';
 
-		dispatch({
-			type: AUTH_USER_BEGIN,
-		});
+		dispatch({ type: AUTH_USER_BEGIN });
 
 		try {
 			const { data } = await axios.post(
@@ -179,9 +177,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const toggleSidebar = () => {
-		dispatch({
-			type: TOGGLE_SIDEBAR,
-		});
+		dispatch({ type: TOGGLE_SIDEBAR });
 	};
 
 	const handleChange = ({ name, value }) => {
