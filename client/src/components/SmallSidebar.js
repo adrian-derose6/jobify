@@ -1,11 +1,9 @@
-import { NavLink } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 
 import Wrapper from '../assets/wrappers/SmallSidebar';
 import NavLinks from './NavLinks';
 import Logo from './Logo';
 import { useAppContext } from '../context/appContext';
-import links from '../utils/links';
 
 const SmallSidebar = () => {
 	const { showSidebar, toggleSidebar } = useAppContext();
